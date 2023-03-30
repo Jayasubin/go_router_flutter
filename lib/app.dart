@@ -10,12 +10,14 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AuthCubit(),
-      child: Builder(builder: (context) {
-        return MaterialApp.router(
-          title: "Routing sample",
-          routerConfig: AppRouter.goRouter(context),
-        );
-      }),
+      child: Builder(
+        builder: (context) {
+          return MaterialApp.router(
+            title: "Routing sample",
+            routerConfig: AppRouter.goRouter(context),
+          );
+        },
+      ),
     );
   }
 }
