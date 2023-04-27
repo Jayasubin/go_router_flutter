@@ -1,3 +1,3 @@
 # routing_strategies
 
-Demonstrating various routing strategies
+Exploring various routing strategies with go_router

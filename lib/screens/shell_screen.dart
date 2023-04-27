@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:routing_strategies/cubit/auth_cubit.dart';
+import 'package:routing_strategies/theme/theme_helper.dart';
 
 class ShellScreen extends StatefulWidget {
   const ShellScreen({
@@ -28,6 +29,7 @@ class _ShellScreenState extends State<ShellScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthCubit, AuthState>(
+      //listenWhen: (pre,cur)=>cur ,
       listener: (context, state) {
         if (state is AuthLoading) {
           context.go('/');
@@ -39,7 +41,10 @@ class _ShellScreenState extends State<ShellScreen> {
           context.go('/auth');
         }
       },
-      child: widget.child,
+      child: ThemeHelper(
+        context: context,
+        child: widget.child,
+      ),
     );
   }
 }
