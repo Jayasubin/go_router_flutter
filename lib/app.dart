@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:routing_strategies/cubit/auth_cubit.dart';
 import 'package:routing_strategies/go_router.dart';
-import 'package:routing_strategies/theme/theme.dart';
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +12,18 @@ class App extends StatelessWidget {
       create: (context) => AuthCubit(),
       child: Builder(
         builder: (context) {
+          final colorScheme = ColorScheme.fromSeed(seedColor: Colors.purple);
+
           return MaterialApp.router(
             title: "Routing sample",
             routerConfig: AppRouter.goRouter(context),
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
+            theme: ThemeData(
+              colorScheme: colorScheme,
+              appBarTheme: AppBarTheme(
+                backgroundColor: colorScheme.primary,
+                foregroundColor: colorScheme.onPrimary,
+              ),
+            ),
           );
         },
       ),

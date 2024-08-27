@@ -13,7 +13,9 @@ class AuthCubit extends Cubit<AuthState> {
     final prefs = await SharedPreferences.getInstance();
 
     final authorized = await Future.delayed(
-        const Duration(seconds: 2), () => prefs.getBool('authorized'));
+      const Duration(seconds: 2),
+      () => prefs.getBool('authorized'),
+    );
 
     if (authorized == true) {
       emit(Authorized());
@@ -30,7 +32,7 @@ class AuthCubit extends Cubit<AuthState> {
       () async {
         final prefs = await SharedPreferences.getInstance();
 
-        final set = await prefs.setBool('authorized', true);
+        await prefs.setBool('authorized', true);
       },
     );
 

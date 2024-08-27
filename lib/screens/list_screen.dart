@@ -1,33 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:routing_strategies/confirm_back.dart';
 
 class ListScreen extends StatelessWidget {
-  const ListScreen({Key? key}) : super(key: key);
+  const ListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('List'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                context.go('/home/list/detail/Item-1');
-              },
-              child: const Text('Detail page'),
-            ),
-          ],
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) =>
+          confirmBack(context, 'list', didPop, result),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('List'),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.go('/home/list/add');
-        },
-        child: const Icon(Icons.add),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  context.go('/home/list/detail/Item-1');
+                },
+                child: const Text('Detail page'),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

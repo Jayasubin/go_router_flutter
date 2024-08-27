@@ -1,31 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:routing_strategies/confirm_back.dart';
 
 class DetailScreen extends StatelessWidget {
   final String id;
 
   const DetailScreen({
-    Key? key,
+    super.key,
     required this.id,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Detail'),
-      ),
-      body: Center(
-        child: Text(
-          id,
-          style: Theme.of(context).textTheme.displayMedium,
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) =>
+          confirmBack(context, 'detail', didPop, result),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Detail'),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.go('/home/list/detail/$id/edit');
-        },
-        child: const Icon(Icons.edit),
+        body: Center(
+          child: Text(
+            id,
+            style: Theme.of(context).textTheme.displaySmall,
+          ),
+        ),
       ),
     );
   }
